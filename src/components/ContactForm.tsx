@@ -69,37 +69,44 @@ export const ContactForm = () => {
     setIsSubmitting(true);
     
     try {
-      // Criar corpo do email formatado
-      const emailBody = `
-Nome: ${values.name}
-Email: ${values.email}
-Departamento: ${departments.find(d => d.value === values.department)?.label}
-
-Mensagem:
-${values.message}
-      `.trim();
-
-      // Criar mailto link
-      const mailtoLink = `mailto:${values.department}?subject=${encodeURIComponent(values.subject)}&body=${encodeURIComponent(emailBody)}`;
+      const departmentLabel = departments.find(d => d.value === values.department)?.label || "";
       
-      // Abrir cliente de email
-      window.location.href = mailtoLink;
-      
-      toast.success("Cliente de email aberto!", {
-        description: "Complete o envio no seu cliente de email.",
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-contact-email`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          },
+          body: JSON.stringify({
+            department: values.department,
+            departmentLabel,
+            name: values.name,
+            email: values.email,
+            subject: values.subject,
+            message: values.message,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Erro ao enviar email");
+      }
+
+      toast.success("Mensagem enviada com sucesso!", {
+        description: "O departamento receberá sua mensagem em breve.",
       });
       
-      // Resetar formulário após um pequeno delay
-      setTimeout(() => {
-        form.reset();
-        setIsSubmitting(false);
-      }, 1000);
+      form.reset();
       
     } catch (error) {
-      console.error("Erro ao preparar email:", error);
-      toast.error("Erro ao abrir cliente de email", {
-        description: "Por favor, tente novamente.",
+      console.error("Erro ao enviar email:", error);
+      toast.error("Erro ao enviar mensagem", {
+        description: error instanceof Error ? error.message : "Por favor, tente novamente.",
       });
+    } finally {
       setIsSubmitting(false);
     }
   };
@@ -206,7 +213,7 @@ ${values.message}
               {isSubmitting ? (
                 <>
                   <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                  Abrindo cliente de email...
+                  Enviando mensagem...
                 </>
               ) : (
                 <>
