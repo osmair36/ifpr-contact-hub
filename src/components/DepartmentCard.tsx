@@ -11,6 +11,34 @@ interface DepartmentCardProps {
 }
 
 export const DepartmentCard = ({ title, email, hours, team, link }: DepartmentCardProps) => {
+  const handleEmailClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const contactForm = document.getElementById('contact-form');
+    const departmentSelect = document.querySelector('[name="department"]') as HTMLButtonElement;
+    const nameInput = document.querySelector('[name="name"]') as HTMLInputElement;
+    
+    if (contactForm) {
+      contactForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      
+      setTimeout(() => {
+        if (departmentSelect) {
+          departmentSelect.click();
+          setTimeout(() => {
+            const option = document.querySelector(`[data-value="${email}"]`) as HTMLElement;
+            if (option) {
+              option.click();
+              setTimeout(() => {
+                if (nameInput) {
+                  nameInput.focus();
+                }
+              }, 200);
+            }
+          }, 100);
+        }
+      }, 500);
+    }
+  };
+
   return (
     <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1 animate-fade-in-up">
       <CardHeader>
@@ -32,12 +60,12 @@ export const DepartmentCard = ({ title, email, hours, team, link }: DepartmentCa
       <CardContent className="space-y-3">
         <div className="flex items-center gap-2 text-muted-foreground">
           <Mail className="w-4 h-4 shrink-0" />
-          <a 
-            href={`mailto:${email}`}
-            className="hover:text-primary transition-colors break-all"
+          <button 
+            onClick={handleEmailClick}
+            className="hover:text-primary transition-colors break-all text-left cursor-pointer"
           >
             {email}
-          </a>
+          </button>
         </div>
         <div className="flex items-start gap-2 text-muted-foreground">
           <Clock className="w-4 h-4 shrink-0 mt-1" />

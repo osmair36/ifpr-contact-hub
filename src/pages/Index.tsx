@@ -3,6 +3,7 @@ import { DepartmentCard } from "@/components/DepartmentCard";
 import { ContactForm } from "@/components/ContactForm";
 import { departments } from "@/data/departments";
 import { Calendar } from "lucide-react";
+import { Card } from "@/components/ui/card";
 
 const Index = () => {
   return (
@@ -23,19 +24,19 @@ const Index = () => {
           ))}
         </div>
 
-        <ContactForm />
-
-        <div className="text-center mt-10 animate-fade-in-up">
+        <Card className="mb-10 p-6 bg-gradient-to-r from-primary/10 to-accent/10 border-2 border-primary/20 animate-fade-in-up">
           <a
-            href="https://ifpr.edu.br/assis-chateaubriand/menu-academico/horarios/"
+            href="https://horario-ifpr-assis-chateaubriand.netlify.app/docs/intro"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-primary font-semibold text-lg hover:text-accent transition-colors hover:scale-105 transform duration-300"
+            className="flex items-center justify-center gap-3 text-primary font-bold text-xl hover:text-accent transition-all hover:scale-105 transform duration-300"
           >
-            <Calendar className="w-5 h-5" />
-            Horários de Aulas e Atendimento dos Professores - Clique aqui
+            <Calendar className="w-6 h-6" />
+            Horários de Aulas e Atendimento dos Professores
           </a>
-        </div>
+        </Card>
+
+        <ContactForm />
       </div>
     </div>
   );

@@ -112,7 +112,7 @@ export const ContactForm = () => {
   };
 
   return (
-    <Card className="mt-10 shadow-lg animate-fade-in-up">
+    <Card id="contact-form" className="mt-10 shadow-lg animate-fade-in-up scroll-mt-6">
       <CardHeader className="text-center">
         <CardTitle className="text-3xl text-primary">Entre em Contato</CardTitle>
       </CardHeader>
@@ -125,7 +125,7 @@ export const ContactForm = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Departamento *</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select onValueChange={field.onChange} value={field.value}>
                     <FormControl>
                       <SelectTrigger>
                         <SelectValue placeholder="Selecione o departamento" />
@@ -133,7 +133,7 @@ export const ContactForm = () => {
                     </FormControl>
                     <SelectContent>
                       {departments.map((dept) => (
-                        <SelectItem key={dept.value} value={dept.value}>
+                        <SelectItem key={dept.value} value={dept.value} data-value={dept.value}>
                           {dept.label}
                         </SelectItem>
                       ))}

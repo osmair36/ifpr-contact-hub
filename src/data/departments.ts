@@ -47,7 +47,7 @@ export const departments: Department[] = [
       "Thaís Valéria Fonseca de Oliveira Scane",
       "Wilian Antonio Pacheco dos Santos",
     ],
-    link: "https://ifpr.edu.br/assis-chateaubriand/menu-academico/secao-pedagogica/informacoes/",
+    link: "https://ifpr.edu.br/assis-chateaubriand/menu-academico/area-do-estudante/apoio-ao-estudante/secao-pedagogica/",
   },
   {
     title: "NAPNE – NÚCLEO DE ATENDIMENTO AS PESSOAS COM NECESSIDADES EDUCACIONAIS ESPECÍFICAS",
@@ -56,7 +56,7 @@ export const departments: Department[] = [
     team: [
       "Paula Fabiane de Souza (Professora do Atendimento Educacional Especializado)",
     ],
-    link: "https://ifpr.edu.br/assis-chateaubriand/menu-academico/secao-pedagogica/napne/",
+    link: "https://ifpr.edu.br/assis-chateaubriand/menu-academico/area-do-estudante/apoio-ao-estudante/napne/",
   },
   {
     title: "DIPLAD – DIRETORIA DE PLANEJAMENTO E ADMINISTRAÇÃO",
@@ -79,7 +79,7 @@ export const departments: Department[] = [
     email: "gtpessoas.assis@ifpr.edu.br",
     hours: "De Segunda a Sexta-Feira das 08:00 às 12:00 e das 13:30 às 17:30",
     team: ["Rodrigo Amaral Calisto"],
-    link: "https://ifpr.edu.br/assis-chateaubriand/menu-institucional/direcao-geral-2/gt-pessoas/",
+    link: "https://ifpr.edu.br/assis-chateaubriand/menu-institucional/gt-pessoas/",
   },
   {
     title: "COORDENAÇÃO DE ENSINO",
@@ -93,6 +93,6 @@ export const departments: Department[] = [
     email: "diepex.assis@ifpr.edu.br",
     hours: "De Segunda a Sexta-Feira das 08:00 às 12:00 e das 13:30 às 17:30",
     team: ["Everaldo Lorensetti"],
-    link: "https://ifpr.edu.br/assis-chateaubriand/menu-institucional/direcao-de-ensino/diretora/",
+    link: "https://ifpr.edu.br/assis-chateaubriand/menu-institucional/direcao-de-ensino/",
   },
 ];
