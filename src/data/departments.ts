@@ -72,7 +72,7 @@ export const departments: Department[] = [
       "Simone Moro Manini – Coordenação Administrativa",
       "Vanderlei Padilha – Seção de Compras e Contratos",
     ],
-    link: "https://ifpr.edu.br/assis-chateaubriand/menu-institucional/direcao-administrativa/secao-administrativa/",
+    link: "https://ifpr.edu.br/assis-chateaubriand/menu-institucional/direcao-administrativa/",
   },
   {
     title: "SEÇÃO DE GESTÃO DE PESSOAS",
