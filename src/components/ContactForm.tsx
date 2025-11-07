@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -64,6 +64,26 @@ export const ContactForm = () => {
       message: "",
     },
   });
+
+  useEffect(() => {
+    const handlePreselectDepartment = (event: CustomEvent<{ email: string }>) => {
+      const departmentEmail = event.detail.email;
+      form.setValue("department", departmentEmail);
+      
+      setTimeout(() => {
+        const nameInput = document.querySelector('input[name="name"]') as HTMLInputElement;
+        if (nameInput) {
+          nameInput.focus();
+        }
+      }, 100);
+    };
+
+    window.addEventListener('preselectDepartment', handlePreselectDepartment as EventListener);
+    
+    return () => {
+      window.removeEventListener('preselectDepartment', handlePreselectDepartment as EventListener);
+    };
+  }, [form]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsSubmitting(true);

@@ -14,28 +14,16 @@ export const DepartmentCard = ({ title, email, hours, team, link }: DepartmentCa
   const handleEmailClick = (e: React.MouseEvent) => {
     e.preventDefault();
     const contactForm = document.getElementById('contact-form');
-    const departmentSelect = document.querySelector('[name="department"]') as HTMLButtonElement;
-    const nameInput = document.querySelector('[name="name"]') as HTMLInputElement;
     
     if (contactForm) {
       contactForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
       
       setTimeout(() => {
-        if (departmentSelect) {
-          departmentSelect.click();
-          setTimeout(() => {
-            const option = document.querySelector(`[data-value="${email}"]`) as HTMLElement;
-            if (option) {
-              option.click();
-              setTimeout(() => {
-                if (nameInput) {
-                  nameInput.focus();
-                }
-              }, 200);
-            }
-          }, 100);
-        }
-      }, 500);
+        const event = new CustomEvent('preselectDepartment', { 
+          detail: { email } 
+        });
+        window.dispatchEvent(event);
+      }, 600);
     }
   };
 
