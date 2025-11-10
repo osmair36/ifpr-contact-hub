@@ -23,14 +23,17 @@ const handler = async (req: Request): Promise<Response> => {
   try {
     const { department, departmentLabel, name, email, subject, message }: ContactEmailRequest = await req.json();
 
-    console.log("Sending email via Brevo:", { department, name, email, subject });
+    console.log("Sending email via Brevo API:", { department, name, email, subject });
 
     const brevoApiKey = Deno.env.get("BREVO_API_KEY");
+    const smtpLogin = Deno.env.get("BREVO_SMTP_LOGIN");
+    
     if (!brevoApiKey) {
       throw new Error("BREVO_API_KEY not configured");
     }
 
-    // Enviar email para o departamento
+    // Enviar email para o departamento usando API do Brevo
+    // Usando o email SMTP login como remetente pois está verificado no Brevo
     const emailResponse = await fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",
       headers: {
@@ -40,8 +43,8 @@ const handler = async (req: Request): Promise<Response> => {
       },
       body: JSON.stringify({
         sender: {
-          name: "Site IFPR Assis Chateaubriand",
-          email: "noreply@ifpr.edu.br",
+          name: "IFPR Assis Chateaubriand",
+          email: smtpLogin || "noreply@ifpr.edu.br",
         },
         to: [
           {
@@ -111,7 +114,7 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     const emailData = await emailResponse.json();
-    console.log("Email sent successfully via Brevo:", emailData);
+    console.log("Email sent successfully via Brevo API:", emailData);
 
     return new Response(
       JSON.stringify({ success: true, messageId: emailData.messageId }),
