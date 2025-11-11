@@ -23,41 +23,26 @@ const handler = async (req: Request): Promise<Response> => {
   try {
     const { department, departmentLabel, name, email, subject, message }: ContactEmailRequest = await req.json();
 
-    console.log("Sending email via Brevo API:", { department, name, email, subject });
+    console.log("Sending email via SMTP2GO API:", { department, name, email, subject });
 
-    const brevoApiKey = Deno.env.get("BREVO_API_KEY");
-    const smtpLogin = Deno.env.get("BREVO_SMTP_LOGIN");
+    const smtp2goApiKey = Deno.env.get("SMTP2GO_API_KEY");
     
-    if (!brevoApiKey) {
-      throw new Error("BREVO_API_KEY not configured");
+    if (!smtp2goApiKey) {
+      throw new Error("SMTP2GO_API_KEY not configured");
     }
 
-    // Enviar email para o departamento usando API do Brevo
-    // Usando o email SMTP login como remetente pois está verificado no Brevo
-    const emailResponse = await fetch("https://api.brevo.com/v3/smtp/email", {
+    // Enviar email para o departamento usando API do SMTP2GO
+    const emailResponse = await fetch("https://api.smtp2go.com/v3/email/send", {
       method: "POST",
       headers: {
-        "accept": "application/json",
-        "api-key": brevoApiKey,
-        "content-type": "application/json",
+        "Content-Type": "application/json",
+        "X-Smtp2go-Api-Key": smtp2goApiKey,
       },
       body: JSON.stringify({
-        sender: {
-          name: "IFPR Assis Chateaubriand",
-          email: smtpLogin || "noreply@ifpr.edu.br",
-        },
-        to: [
-          {
-            email: department,
-            name: departmentLabel,
-          },
-        ],
-        replyTo: {
-          email: email,
-          name: name,
-        },
+        sender: "noreply@ifpr.edu.br",
+        to: [department],
         subject: subject,
-        htmlContent: `
+        html_body: `
           <!DOCTYPE html>
           <html>
             <head>
@@ -104,20 +89,26 @@ const handler = async (req: Request): Promise<Response> => {
             </body>
           </html>
         `,
+        custom_headers: [
+          {
+            header: "Reply-To",
+            value: `${name} <${email}>`,
+          },
+        ],
       }),
     });
 
     if (!emailResponse.ok) {
       const errorData = await emailResponse.text();
-      console.error("Brevo API error:", errorData);
-      throw new Error(`Brevo API error: ${emailResponse.status} - ${errorData}`);
+      console.error("SMTP2GO API error:", errorData);
+      throw new Error(`SMTP2GO API error: ${emailResponse.status} - ${errorData}`);
     }
 
     const emailData = await emailResponse.json();
-    console.log("Email sent successfully via Brevo API:", emailData);
+    console.log("Email sent successfully via SMTP2GO API:", emailData);
 
     return new Response(
-      JSON.stringify({ success: true, messageId: emailData.messageId }),
+      JSON.stringify({ success: true, data: emailData.data }),
       {
         status: 200,
         headers: {
