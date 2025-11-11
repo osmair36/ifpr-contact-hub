@@ -45,8 +45,8 @@ const departments = [
   { value: "biblioteca.assis@ifpr.edu.br", label: "Biblioteca" },
   { value: "sepae.assis@ifpr.edu.br", label: "SEPAE" },
   { value: "napne.assischateaubriand@ifpr.edu.br", label: "NAPNE" },
-  { value: "dpa.assis@ifpr.edu.br", label: "DIPLAD" },
-  { value: "gtpessoas.assis@ifpr.edu.br", label: "Gestão de Pessoas" },
+  { value: "dpa.assischateaubriand@ifpr.edu.br", label: "DIPLAD" },
+  { value: "segepe.assis@ifpr.edu.br", label: "Gestão de Pessoas" },
   { value: "coens.assis@ifpr.edu.br", label: "Coordenação de Ensino" },
   { value: "diepex.assis@ifpr.edu.br", label: "DIEPEX" },
 ];

@@ -60,7 +60,7 @@ export const departments: Department[] = [
   },
   {
     title: "DIPLAD – DIRETORIA DE PLANEJAMENTO E ADMINISTRAÇÃO",
-    email: "dpa.assis@ifpr.edu.br",
+    email: "dpa.assischateaubriand@ifpr.edu.br",
     hours: "De Segunda a Sexta-Feira das 08:00 às 12:00 e das 13:30 às 17:30",
     team: [
       "Edson Alberto Becker – Coordenação Contábil, Orçamentária e Financeira",
@@ -76,7 +76,7 @@ export const departments: Department[] = [
   },
   {
     title: "SEÇÃO DE GESTÃO DE PESSOAS",
-    email: "gtpessoas.assis@ifpr.edu.br",
+    email: "segepe.assis@ifpr.edu.br",
     hours: "De Segunda a Sexta-Feira das 08:00 às 12:00 e das 13:30 às 17:30",
     team: ["Rodrigo Amaral Calisto"],
     link: "https://ifpr.edu.br/assis-chateaubriand/menu-institucional/gt-pessoas/",
