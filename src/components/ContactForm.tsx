@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
-import { Send, Loader2 } from "lucide-react";
+import { Send, Loader2, FileText, Library, Heart, Accessibility, Building2, Users, GraduationCap, Lightbulb } from "lucide-react";
 
 const formSchema = z.object({
   department: z.string().min(1, { message: "Selecione um departamento" }),
@@ -41,14 +41,14 @@ const formSchema = z.object({
 });
 
 const departments = [
-  { value: "assis.secretaria.@ifpr.edu.br", label: "Secretaria Acadêmica" },
-  { value: "biblioteca.assis@ifpr.edu.br", label: "Biblioteca" },
-  { value: "sepae.assis@ifpr.edu.br", label: "SEPAE" },
-  { value: "napne.assischateaubriand@ifpr.edu.br", label: "NAPNE" },
-  { value: "dpa.assischateaubriand@ifpr.edu.br", label: "DIPLAD" },
-  { value: "segepe.assis@ifpr.edu.br", label: "Gestão de Pessoas" },
-  { value: "coens.assis@ifpr.edu.br", label: "Coordenação de Ensino" },
-  { value: "diepex.assis@ifpr.edu.br", label: "DIEPEX" },
+  { value: "assis.secretaria.@ifpr.edu.br", label: "Secretaria Acadêmica", icon: FileText },
+  { value: "biblioteca.assis@ifpr.edu.br", label: "Biblioteca", icon: Library },
+  { value: "sepae.assis@ifpr.edu.br", label: "SEPAE", icon: Heart },
+  { value: "napne.assischateaubriand@ifpr.edu.br", label: "NAPNE", icon: Accessibility },
+  { value: "dpa.assischateaubriand@ifpr.edu.br", label: "DIPLAD", icon: Building2 },
+  { value: "segepe.assis@ifpr.edu.br", label: "Gestão de Pessoas", icon: Users },
+  { value: "coens.assis@ifpr.edu.br", label: "Coordenação de Ensino", icon: GraduationCap },
+  { value: "diepex.assis@ifpr.edu.br", label: "DIEPEX", icon: Lightbulb },
 ];
 
 export const ContactForm = () => {
@@ -152,11 +152,17 @@ export const ContactForm = () => {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {departments.map((dept) => (
-                        <SelectItem key={dept.value} value={dept.value} data-value={dept.value}>
-                          {dept.label}
-                        </SelectItem>
-                      ))}
+                      {departments.map((dept) => {
+                        const Icon = dept.icon;
+                        return (
+                          <SelectItem key={dept.value} value={dept.value} data-value={dept.value}>
+                            <div className="flex items-center gap-2">
+                              <Icon className="w-4 h-4" />
+                              <span>{dept.label}</span>
+                            </div>
+                          </SelectItem>
+                        );
+                      })}
                     </SelectContent>
                   </Select>
                   <FormMessage />
