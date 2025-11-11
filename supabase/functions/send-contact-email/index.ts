@@ -39,7 +39,7 @@ const handler = async (req: Request): Promise<Response> => {
         "X-Smtp2go-Api-Key": smtp2goApiKey,
       },
       body: JSON.stringify({
-        sender: "noreply@ifpr.edu.br",
+        sender: "osmair.silva@ifpr.edu.br",
         to: [department],
         subject: subject,
         html_body: `
