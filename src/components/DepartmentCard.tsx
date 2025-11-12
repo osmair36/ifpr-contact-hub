@@ -2,6 +2,7 @@ import { ExternalLink, Mail, Clock, Users, LucideIcon } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { HoursDialog } from "./HoursDialog";
+import { TeamDialog } from "./TeamDialog";
 
 interface DepartmentCardProps {
   title: string;
@@ -65,20 +66,12 @@ export const DepartmentCard = ({ title, email, hours, team, link, icon: Icon }: 
           </button>
         </HoursDialog>
         <div className="pt-2 border-t border-border">
-          <div className="flex items-center gap-2 font-semibold mb-2 text-foreground">
-            <Users className="w-4 h-4" />
-            <span>Equipe:</span>
-          </div>
-          <div className="space-y-1.5 ml-6">
-            {team.map((member, index) => (
-              <p 
-                key={index}
-                className="text-sm text-muted-foreground hover:text-accent hover:scale-105 transition-all cursor-default"
-              >
-                {member}
-              </p>
-            ))}
-          </div>
+          <TeamDialog team={team} departmentTitle={title}>
+            <button className="flex items-center gap-2 font-semibold text-foreground hover:text-primary transition-colors group w-full text-left">
+              <Users className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              <span>Equipe ({team.length})</span>
+            </button>
+          </TeamDialog>
         </div>
       </CardContent>
     </Card>
