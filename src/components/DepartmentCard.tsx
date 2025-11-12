@@ -67,11 +67,21 @@ export const DepartmentCard = ({ title, email, hours, team, link, icon: Icon }: 
         </HoursDialog>
         <div className="pt-2 border-t border-border">
           <TeamDialog team={team} departmentTitle={title}>
-            <button className="flex items-center gap-2 font-semibold text-foreground hover:text-primary transition-colors group w-full text-left">
+            <button className="flex items-center gap-2 font-semibold mb-2 text-foreground hover:text-primary transition-colors group w-full text-left">
               <Users className="w-4 h-4 group-hover:scale-110 transition-transform" />
               <span>Equipe ({team.length})</span>
             </button>
           </TeamDialog>
+          <div className="space-y-1.5 ml-6">
+            {team.map((member, index) => (
+              <p 
+                key={index}
+                className="text-sm text-muted-foreground hover:text-accent hover:scale-105 transition-all cursor-default"
+              >
+                {member}
+              </p>
+            ))}
+          </div>
         </div>
       </CardContent>
     </Card>
