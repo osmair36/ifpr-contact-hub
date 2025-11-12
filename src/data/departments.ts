@@ -1,9 +1,12 @@
+import { LucideIcon, FileText, Library, Heart, Accessibility, Building2, Users, GraduationCap, Lightbulb } from "lucide-react";
+
 export interface Department {
   title: string;
   email: string;
   hours: string;
   team: string[];
   link: string;
+  icon: LucideIcon;
 }
 
 export const departments: Department[] = [
@@ -18,6 +21,7 @@ export const departments: Department[] = [
       "Simone Moro Manini",
     ],
     link: "https://ifpr.edu.br/assis-chateaubriand/menu-academico/secretaria-academica/informacoes/",
+    icon: FileText,
   },
   {
     title: "BIBLIOTECA",
@@ -30,6 +34,7 @@ export const departments: Department[] = [
       "Marileide Bertoli Fabricio Mestriner",
     ],
     link: "https://ifpr.edu.br/assis-chateaubriand/menu-academico/biblioteca/regulamento-2/",
+    icon: Library,
   },
   {
     title: "SEPAE – SEÇÃO PEDAGÓGICA E DE ASSUNTOS ESTUDANTIS",
@@ -48,6 +53,7 @@ export const departments: Department[] = [
       "Wilian Antonio Pacheco dos Santos",
     ],
     link: "https://ifpr.edu.br/assis-chateaubriand/menu-academico/area-do-estudante/apoio-ao-estudante/secao-pedagogica/",
+    icon: Heart,
   },
   {
     title: "NAPNE – NÚCLEO DE ATENDIMENTO AS PESSOAS COM NECESSIDADES EDUCACIONAIS ESPECÍFICAS",
@@ -57,6 +63,7 @@ export const departments: Department[] = [
       "Paula Fabiane de Souza (Professora do Atendimento Educacional Especializado)",
     ],
     link: "https://ifpr.edu.br/assis-chateaubriand/menu-academico/area-do-estudante/apoio-ao-estudante/napne/",
+    icon: Accessibility,
   },
   {
     title: "DIPLAD – DIRETORIA DE PLANEJAMENTO E ADMINISTRAÇÃO",
@@ -73,6 +80,7 @@ export const departments: Department[] = [
       "Vanderlei Padilha – Seção de Compras e Contratos",
     ],
     link: "https://ifpr.edu.br/assis-chateaubriand/menu-institucional/direcao-administrativa/",
+    icon: Building2,
   },
   {
     title: "SEÇÃO DE GESTÃO DE PESSOAS",
@@ -80,6 +88,7 @@ export const departments: Department[] = [
     hours: "De Segunda a Sexta-Feira das 08:00 às 12:00 e das 13:30 às 17:30",
     team: ["Rodrigo Amaral Calisto"],
     link: "https://ifpr.edu.br/assis-chateaubriand/menu-institucional/gt-pessoas/",
+    icon: Users,
   },
   {
     title: "COORDENAÇÃO DE ENSINO",
@@ -87,6 +96,7 @@ export const departments: Department[] = [
     hours: "De Segunda a Sexta-Feira das 08:00 às 12:00 e das 13:30 às 17:30",
     team: ["Vagner Simões Santos"],
     link: "https://ifpr.edu.br/assis-chateaubriand/menu-institucional/direcao-de-ensino/coordenacao-de-ensino/",
+    icon: GraduationCap,
   },
   {
     title: "DIEPEX – DIRETORIA DE ENSINO, PESQUISA E EXTENSÃO",
@@ -94,5 +104,6 @@ export const departments: Department[] = [
     hours: "De Segunda a Sexta-Feira das 08:00 às 12:00 e das 13:30 às 17:30",
     team: ["Everaldo Lorensetti"],
     link: "https://ifpr.edu.br/assis-chateaubriand/menu-institucional/direcao-de-ensino/",
+    icon: Lightbulb,
   },
 ];

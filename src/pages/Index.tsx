@@ -20,6 +20,7 @@ const Index = () => {
               hours={dept.hours}
               team={dept.team}
               link={dept.link}
+              icon={dept.icon}
             />
           ))}
         </div>

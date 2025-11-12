@@ -1,6 +1,7 @@
-import { ExternalLink, Mail, Clock, Users } from "lucide-react";
+import { ExternalLink, Mail, Clock, Users, LucideIcon } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { HoursDialog } from "./HoursDialog";
 
 interface DepartmentCardProps {
   title: string;
@@ -8,9 +9,10 @@ interface DepartmentCardProps {
   hours: string;
   team: string[];
   link: string;
+  icon: LucideIcon;
 }
 
-export const DepartmentCard = ({ title, email, hours, team, link }: DepartmentCardProps) => {
+export const DepartmentCard = ({ title, email, hours, team, link, icon: Icon }: DepartmentCardProps) => {
   const handleEmailClick = (e: React.MouseEvent) => {
     e.preventDefault();
     const contactForm = document.getElementById('contact-form');
@@ -31,7 +33,8 @@ export const DepartmentCard = ({ title, email, hours, team, link }: DepartmentCa
     <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1 animate-fade-in-up">
       <CardHeader>
         <CardTitle className="flex items-start justify-between gap-3 text-primary group">
-          <span className="flex-1 group-hover:scale-105 transition-transform">
+          <span className="flex-1 flex items-center gap-3 group-hover:scale-105 transition-transform">
+            <Icon className="w-6 h-6 shrink-0" />
             {title}
           </span>
           <Button
@@ -55,10 +58,12 @@ export const DepartmentCard = ({ title, email, hours, team, link }: DepartmentCa
             {email}
           </button>
         </div>
-        <div className="flex items-start gap-2 text-muted-foreground">
-          <Clock className="w-4 h-4 shrink-0 mt-1" />
-          <span>{hours}</span>
-        </div>
+        <HoursDialog hours={hours} departmentTitle={title}>
+          <button className="flex items-start gap-2 text-muted-foreground hover:text-primary transition-colors group w-full text-left">
+            <Clock className="w-4 h-4 shrink-0 mt-1 group-hover:scale-110 transition-transform" />
+            <span className="flex-1">{hours}</span>
+          </button>
+        </HoursDialog>
         <div className="pt-2 border-t border-border">
           <div className="flex items-center gap-2 font-semibold mb-2 text-foreground">
             <Users className="w-4 h-4" />
