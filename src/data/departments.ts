@@ -1,4 +1,4 @@
-import { LucideIcon, FileText, Library, Heart, Accessibility, Building2, Users, GraduationCap, Lightbulb } from "lucide-react";
+import { LucideIcon, FileText, Library, BookOpen, Accessibility, Building2, Users, GraduationCap, Lightbulb } from "lucide-react";
 
 export interface Department {
   title: string;
@@ -53,7 +53,7 @@ export const departments: Department[] = [
       "Wilian Antonio Pacheco dos Santos",
     ],
     link: "https://ifpr.edu.br/assis-chateaubriand/menu-academico/area-do-estudante/apoio-ao-estudante/secao-pedagogica/",
-    icon: Heart,
+    icon: BookOpen,
   },
   {
     title: "NAPNE – NÚCLEO DE ATENDIMENTO AS PESSOAS COM NECESSIDADES EDUCACIONAIS ESPECÍFICAS",

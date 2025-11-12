@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
-import { Send, Loader2, FileText, Library, Heart, Accessibility, Building2, Users, GraduationCap, Lightbulb } from "lucide-react";
+import { Send, Loader2, FileText, Library, BookOpen, Accessibility, Building2, Users, GraduationCap, Lightbulb } from "lucide-react";
 
 const formSchema = z.object({
   department: z.string().min(1, { message: "Selecione um departamento" }),
@@ -43,7 +43,7 @@ const formSchema = z.object({
 const departments = [
   { value: "assis.secretaria.@ifpr.edu.br", label: "Secretaria Acadêmica", icon: FileText },
   { value: "biblioteca.assis@ifpr.edu.br", label: "Biblioteca", icon: Library },
-  { value: "sepae.assis@ifpr.edu.br", label: "SEPAE", icon: Heart },
+  { value: "sepae.assis@ifpr.edu.br", label: "SEPAE", icon: BookOpen },
   { value: "napne.assischateaubriand@ifpr.edu.br", label: "NAPNE", icon: Accessibility },
   { value: "dpa.assischateaubriand@ifpr.edu.br", label: "DIPLAD", icon: Building2 },
   { value: "segepe.assis@ifpr.edu.br", label: "Gestão de Pessoas", icon: Users },
