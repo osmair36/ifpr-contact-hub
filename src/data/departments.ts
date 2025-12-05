@@ -18,7 +18,6 @@ export const departments: Department[] = [
       "Cristiane Tatiane Anzanello",
       "Franciane Dal'Boit Santini",
       "Liéberti Marcucci de Araújo",
-      "Simone Moro Manini",
     ],
     link: "https://ifpr.edu.br/assis-chateaubriand/menu-academico/secretaria-academica/informacoes/",
     icon: FileText,
@@ -28,7 +27,6 @@ export const departments: Department[] = [
     email: "biblioteca.assis@ifpr.edu.br",
     hours: "De Segunda a sexta das 07:30 às 22:00",
     team: [
-      "Ademir Rodrigo de Araújo Santos",
       "Cesar Augusto Silveira Junior",
       "Cler Rosane Coldebella Muraro",
       "Marileide Bertoli Fabricio Mestriner",
