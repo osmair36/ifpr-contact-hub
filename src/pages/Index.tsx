@@ -1,7 +1,6 @@
 import { Header } from "@/components/Header";
 import { DepartmentCard } from "@/components/DepartmentCard";
 import { ContactForm } from "@/components/ContactForm";
-import { ScheduleInfoDialog } from "@/components/ScheduleInfoDialog";
 import { departments } from "@/data/departments";
 import { Calendar } from "lucide-react";
 import { Card } from "@/components/ui/card";
@@ -26,7 +25,7 @@ const Index = () => {
           ))}
         </div>
 
-        <Card className="mb-6 p-6 bg-gradient-to-r from-primary/10 to-accent/10 border-2 border-primary/20 animate-fade-in-up">
+        <Card className="mb-10 p-6 bg-gradient-to-r from-primary/10 to-accent/10 border-2 border-primary/20 animate-fade-in-up">
           <a
             href="https://horario-ifpr-assis-chateaubriand.netlify.app/docs/intro"
             target="_blank"
@@ -37,10 +36,6 @@ const Index = () => {
             Horários de Aulas e Atendimento dos Professores
           </a>
         </Card>
-
-        <div className="mb-10 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-          <ScheduleInfoDialog />
-        </div>
 
         <ContactForm />
       </div>
