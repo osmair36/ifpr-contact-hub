@@ -12,7 +12,7 @@ export interface Department {
 export const departments: Department[] = [
   {
     title: "SECRETARIA ACADÊMICA",
-    email: "assis.secretaria.@ifpr.edu.br",
+    email: "assis.secretaria@ifpr.edu.br",
     hours: "De Segunda a sexta das 08:00 às 20:00",
     team: [
       "Cristiane Tatiane Anzanello",
