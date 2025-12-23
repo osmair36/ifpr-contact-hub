@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
-import { Send, Loader2, FileText, Library, BookOpen, Accessibility, Building2, Users, GraduationCap, Lightbulb } from "lucide-react";
+import { Send, Loader2 } from "lucide-react";
 
 import { departments } from "@/data/departments";
 
@@ -144,17 +144,11 @@ export const ContactForm = () => {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {departments.map((dept) => {
-                        const Icon = dept.icon;
-                        return (
-                          <SelectItem key={dept.email} value={dept.email}>
-                            <div className="flex items-center gap-2">
-                              <Icon className="w-4 h-4" />
-                              <span>{dept.title}</span>
-                            </div>
-                          </SelectItem>
-                        );
-                      })}
+                      {departments.map((dept) => (
+                        <SelectItem key={dept.email} value={dept.email}>
+                          {dept.title}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
                   <FormMessage />
