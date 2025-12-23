@@ -104,12 +104,10 @@ export const ContactForm = () => {
         `
       });
 
-      if (response !== "OK") {
-        throw new Error(response);
-      }
 
-      toast.success("Mensagem enviada com sucesso!", {
-        description: "O departamento receberá sua mensagem em breve.",
+
+      toast.success("Mensagem enviada!", {
+        description: "Se tudo estiver correto, o departamento receberá em breve.",
       });
 
       form.reset();

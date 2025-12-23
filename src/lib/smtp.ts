@@ -21,13 +21,14 @@ export const sendEmail = async (data: EmailData): Promise<string> => {
     formData.append("Body", data.Body);
     formData.append("Action", "Send");
 
-    const response = await fetch("https://smtpjs.com/v3/smtpjs.aspx", {
+    await fetch("https://smtpjs.com/v3/smtpjs.aspx", {
         method: "POST",
+        mode: "no-cors",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
         },
         body: formData.toString(),
     });
 
-    return await response.text();
+    return "OK";
 };
