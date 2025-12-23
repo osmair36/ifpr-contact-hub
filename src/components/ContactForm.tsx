@@ -13,13 +13,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
 import { Send, Loader2 } from "lucide-react";
@@ -137,20 +131,19 @@ export const ContactForm = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Departamento *</FormLabel>
-                  <Select onValueChange={field.onChange} value={field.value}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Selecione o departamento" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
+                  <FormControl>
+                    <select
+                      className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      {...field}
+                    >
+                      <option value="" disabled>Selecione o departamento</option>
                       {departments.map((dept) => (
-                        <SelectItem key={dept.email} value={dept.email}>
+                        <option key={dept.email} value={dept.email}>
                           {dept.title}
-                        </SelectItem>
+                        </option>
                       ))}
-                    </SelectContent>
-                  </Select>
+                    </select>
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
