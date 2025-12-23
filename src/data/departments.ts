@@ -1,4 +1,4 @@
-import { LucideIcon, FileText, Library, BookOpen, Accessibility, Building2, Users, GraduationCap, Lightbulb } from "lucide-react";
+import { LucideIcon, FileText, Library, BookOpen, Accessibility, Building2, Users, GraduationCap, Lightbulb, Monitor } from "lucide-react";
 
 export interface Department {
   title: string;
@@ -103,5 +103,13 @@ export const departments: Department[] = [
     team: ["Everaldo Lorensetti"],
     link: "https://ifpr.edu.br/assis-chateaubriand/menu-institucional/direcao-de-ensino/",
     icon: Lightbulb,
+  },
+  {
+    title: "Seção de Tecnologia da Informação - TI",
+    email: "rtic.assischateaubriand@ifpr.edu.br",
+    hours: "De Segunda a Sexta-Feira das 08:00 às 12:00 e das 13:30 às 17:30",
+    team: ["Osmair Barbosa da Silva - Técnico de Tecnologia da Informação"],
+    link: "https://ifpr.edu.br/assis-chateaubriand/menu-institucional/direcao-administrativa/departamento-de-ti/",
+    icon: Monitor,
   },
 ];
