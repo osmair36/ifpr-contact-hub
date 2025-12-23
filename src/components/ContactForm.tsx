@@ -36,6 +36,27 @@ const formSchema = z.object({
     .max(2000, { message: "Mensagem deve ter no máximo 2000 caracteres" }),
 });
 
+declare global {
+  interface Window {
+    Email: any;
+  }
+}
+
+const loadEmailScript = (): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    if (window.Email) {
+      resolve();
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = "https://smtpjs.com/v3/smtp.js";
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error("Falha ao carregar o script de envio de email. Verifique sua conexão."));
+    document.head.appendChild(script);
+  });
+};
+
 export const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -78,10 +99,11 @@ export const ContactForm = () => {
     setIsSubmitting(true);
 
     try {
+      await loadEmailScript();
+
       const departmentData = departments.find(d => d.email === values.department);
       const departmentLabel = departmentData?.title || "";
 
-      // @ts-ignore
       const response = await window.Email.send({
         Host: "mail.smtp2go.com",
         Username: "ifpr.edu.br",
