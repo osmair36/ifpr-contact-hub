@@ -82,10 +82,11 @@ export const ContactForm = () => {
       const departmentLabel = departmentData?.title || "";
 
       // @ts-ignore
-      await window.Email.send({
+      const response = await window.Email.send({
         Host: "mail.smtp2go.com",
         Username: "ifpr.edu.br",
         Password: "hgMQ9vYyODcyYlPk",
+        Port: "2525",
         To: values.department,
         From: "comunicacao.assis@ifpr.edu.br",
         Subject: values.subject,
@@ -101,6 +102,10 @@ export const ContactForm = () => {
         `
       });
 
+      if (response !== "OK") {
+        throw new Error(response);
+      }
+
       toast.success("Mensagem enviada com sucesso!", {
         description: "O departamento receberá sua mensagem em breve.",
       });
@@ -110,7 +115,7 @@ export const ContactForm = () => {
     } catch (error) {
       console.error("Erro ao enviar email:", error);
       toast.error("Erro ao enviar mensagem", {
-        description: "Por favor, tente novamente.",
+        description: error instanceof Error ? error.message : "Ocorreu um erro desconhecido",
       });
     } finally {
       setIsSubmitting(false);
