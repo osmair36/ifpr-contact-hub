@@ -24,6 +24,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
 import { Send, Loader2, FileText, Library, BookOpen, Accessibility, Building2, Users, GraduationCap, Lightbulb } from "lucide-react";
 
+import { departments } from "@/data/departments";
+
 const formSchema = z.object({
   department: z.string().min(1, { message: "Selecione um departamento" }),
   name: z.string()
@@ -39,17 +41,6 @@ const formSchema = z.object({
     .min(10, { message: "Mensagem deve ter pelo menos 10 caracteres" })
     .max(2000, { message: "Mensagem deve ter no máximo 2000 caracteres" }),
 });
-
-const departments = [
-  { value: "assis.secretaria.@ifpr.edu.br", label: "Secretaria Acadêmica", icon: FileText },
-  { value: "biblioteca.assis@ifpr.edu.br", label: "Biblioteca", icon: Library },
-  { value: "sepae.assis@ifpr.edu.br", label: "SEPAE", icon: BookOpen },
-  { value: "napne.assischateaubriand@ifpr.edu.br", label: "NAPNE", icon: Accessibility },
-  { value: "dpa.assischateaubriand@ifpr.edu.br", label: "DIPLAD", icon: Building2 },
-  { value: "segepe.assis@ifpr.edu.br", label: "Gestão de Pessoas", icon: Users },
-  { value: "coens.assis@ifpr.edu.br", label: "Coordenação de Ensino", icon: GraduationCap },
-  { value: "diepex.assis@ifpr.edu.br", label: "DIEPEX", icon: Lightbulb },
-];
 
 export const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -68,14 +59,18 @@ export const ContactForm = () => {
   useEffect(() => {
     const handlePreselectDepartment = (event: CustomEvent<{ email: string }>) => {
       const departmentEmail = event.detail.email;
-      form.setValue("department", departmentEmail);
+      const departmentExists = departments.find(d => d.email === departmentEmail);
 
-      setTimeout(() => {
-        const nameInput = document.querySelector('input[name="name"]') as HTMLInputElement;
-        if (nameInput) {
-          nameInput.focus();
-        }
-      }, 100);
+      if (departmentExists) {
+        form.setValue("department", departmentEmail);
+
+        setTimeout(() => {
+          const nameInput = document.querySelector('input[name="name"]') as HTMLInputElement;
+          if (nameInput) {
+            nameInput.focus();
+          }
+        }, 100);
+      }
     };
 
     window.addEventListener('preselectDepartment', handlePreselectDepartment as EventListener);
@@ -89,7 +84,8 @@ export const ContactForm = () => {
     setIsSubmitting(true);
 
     try {
-      const departmentLabel = departments.find(d => d.value === values.department)?.label || "";
+      const departmentData = departments.find(d => d.email === values.department);
+      const departmentLabel = departmentData?.title || "";
 
       // @ts-ignore
       await window.Email.send({
@@ -151,10 +147,10 @@ export const ContactForm = () => {
                       {departments.map((dept) => {
                         const Icon = dept.icon;
                         return (
-                          <SelectItem key={dept.value} value={dept.value} data-value={dept.value}>
+                          <SelectItem key={dept.email} value={dept.email}>
                             <div className="flex items-center gap-2">
                               <Icon className="w-4 h-4" />
-                              <span>{dept.label}</span>
+                              <span>{dept.title}</span>
                             </div>
                           </SelectItem>
                         );
