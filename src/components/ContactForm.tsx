@@ -18,8 +18,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
 import { Send, Loader2 } from "lucide-react";
 
+import { supabase } from "@/integrations/supabase/client";
 import { departments } from "@/data/departments";
-import { sendEmail } from "@/lib/smtp";
 
 const formSchema = z.object({
   department: z.string().min(1, { message: "Selecione um departamento" }),
@@ -84,25 +84,19 @@ export const ContactForm = () => {
       const departmentData = departments.find(d => d.email === values.department);
       const departmentLabel = departmentData?.title || "";
 
-      const response = await sendEmail({
-        Host: "mail.smtp2go.com",
-        Username: "ifpr.edu.br",
-        Password: "hgMQ9vYyODcyYlPk",
-        Port: "2525",
-        To: values.department,
-        From: "comunicacao.assis@ifpr.edu.br",
-        Subject: values.subject,
-        Body: `
-          <h3>Nova Mensagem de Contato - IFPR</h3>
-          <p><strong>Departamento:</strong> ${departmentLabel}</p>
-          <p><strong>Nome:</strong> ${values.name}</p>
-          <p><strong>Email:</strong> ${values.email}</p>
-          <p><strong>Assunto:</strong> ${values.subject}</p>
-          <hr/>
-          <p><strong>Mensagem:</strong></p>
-          <p>${values.message.replace(/\n/g, "<br>")}</p>
-        `
+      // Usar função do Supabase para enviar email (agindo como proxy seguro)
+      const { data, error } = await supabase.functions.invoke("send-contact-email", {
+        body: {
+          department: values.department,
+          departmentLabel,
+          name: values.name,
+          email: values.email,
+          subject: values.subject,
+          message: values.message,
+        },
       });
+
+      if (error) throw error;
 
 
 
