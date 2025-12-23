@@ -69,7 +69,7 @@ export const ContactForm = () => {
     const handlePreselectDepartment = (event: CustomEvent<{ email: string }>) => {
       const departmentEmail = event.detail.email;
       form.setValue("department", departmentEmail);
-      
+
       setTimeout(() => {
         const nameInput = document.querySelector('input[name="name"]') as HTMLInputElement;
         if (nameInput) {
@@ -79,7 +79,7 @@ export const ContactForm = () => {
     };
 
     window.addEventListener('preselectDepartment', handlePreselectDepartment as EventListener);
-    
+
     return () => {
       window.removeEventListener('preselectDepartment', handlePreselectDepartment as EventListener);
     };
@@ -87,44 +87,40 @@ export const ContactForm = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsSubmitting(true);
-    
+
     try {
       const departmentLabel = departments.find(d => d.value === values.department)?.label || "";
-      
-      const response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-contact-email`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-          },
-          body: JSON.stringify({
-            department: values.department,
-            departmentLabel,
-            name: values.name,
-            email: values.email,
-            subject: values.subject,
-            message: values.message,
-          }),
-        }
-      );
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Erro ao enviar email");
-      }
+      // @ts-ignore
+      await window.Email.send({
+        Host: "mail.smtp2go.com",
+        Username: "ifpr.edu.br",
+        Password: "hgMQ9vYyODcyYlPk",
+        To: values.department,
+        From: "comunicacao.assis@ifpr.edu.br",
+        Subject: values.subject,
+        Body: `
+          <h3>Nova Mensagem de Contato - IFPR</h3>
+          <p><strong>Departamento:</strong> ${departmentLabel}</p>
+          <p><strong>Nome:</strong> ${values.name}</p>
+          <p><strong>Email:</strong> ${values.email}</p>
+          <p><strong>Assunto:</strong> ${values.subject}</p>
+          <hr/>
+          <p><strong>Mensagem:</strong></p>
+          <p>${values.message.replace(/\n/g, "<br>")}</p>
+        `
+      });
 
       toast.success("Mensagem enviada com sucesso!", {
         description: "O departamento receberá sua mensagem em breve.",
       });
-      
+
       form.reset();
-      
+
     } catch (error) {
       console.error("Erro ao enviar email:", error);
       toast.error("Erro ao enviar mensagem", {
-        description: error instanceof Error ? error.message : "Por favor, tente novamente.",
+        description: "Por favor, tente novamente.",
       });
     } finally {
       setIsSubmitting(false);
