@@ -1,6 +1,7 @@
 import { Header } from "@/components/Header";
 import { DepartmentCard } from "@/components/DepartmentCard";
 import { ContactForm } from "@/components/ContactForm";
+import { BackButton } from "@/components/BackButton";
 import { departments } from "@/data/departments";
 import { Calendar } from "lucide-react";
 import { Card } from "@/components/ui/card";
@@ -9,8 +10,12 @@ const Index = () => {
   return (
     <div className="min-h-screen p-6">
       <div className="max-w-7xl mx-auto">
+        <div className="mb-6 flex justify-center">
+          <BackButton />
+        </div>
+
         <Header />
-        
+
         <div className="grid md:grid-cols-2 gap-6 mb-10">
           {departments.map((dept, index) => (
             <DepartmentCard
@@ -38,6 +43,10 @@ const Index = () => {
         </Card>
 
         <ContactForm />
+
+        <div className="mt-10 flex justify-center">
+          <BackButton />
+        </div>
       </div>
     </div>
   );
