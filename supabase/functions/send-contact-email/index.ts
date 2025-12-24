@@ -79,7 +79,7 @@ const handler = async (req: Request): Promise<Response> => {
                   <p style="margin: 0; white-space: pre-wrap;">${message}</p>
                 </div>
                 <div class="footer">
-                  <p>Esta mensagem foi enviada através do formulário de contato do site do IFPR Campus Assis Chateaubriand.</p>
+                  <p>Esta mensagem foi enviada através do formulário de contato FALE CONOSCO do site do IFPR Campus Assis Chateaubriand.</p>
                 </div>
               </div>
             </div>
