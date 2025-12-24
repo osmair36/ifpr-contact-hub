@@ -105,7 +105,7 @@ export const departments: Department[] = [
     icon: Lightbulb,
   },
   {
-    title: "Seção de Tecnologia da Informação - TI",
+    title: "SEÇÃO DE TECNOLOGIA DA INFORMAÇÃO - TI",
     email: "rtic.assischateaubriand@ifpr.edu.br",
     hours: "De Segunda a Sexta-Feira das 08:00 às 12:00 e das 13:30 às 17:30",
     team: ["Osmair Barbosa da Silva - Técnico de Tecnologia da Informação"],
