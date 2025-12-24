@@ -10,10 +10,6 @@ const Index = () => {
   return (
     <div className="min-h-screen p-6">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-6 flex justify-center">
-          <BackButton />
-        </div>
-
         <Header />
 
         <div className="grid md:grid-cols-2 gap-6 mb-10">
