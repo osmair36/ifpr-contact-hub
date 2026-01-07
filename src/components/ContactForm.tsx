@@ -18,7 +18,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
 import { Send, Loader2 } from "lucide-react";
 
-import { supabase } from "@/integrations/supabase/client";
+import { sendEmail } from "@/services/emailService";
 import { departments } from "@/data/departments";
 
 const formSchema = z.object({
@@ -85,18 +85,17 @@ export const ContactForm = () => {
       const departmentLabel = departmentData?.title || "";
 
       // Usar função do Supabase para enviar email (agindo como proxy seguro)
-      const { data, error } = await supabase.functions.invoke("send-contact-email", {
-        body: {
-          department: values.department,
-          departmentLabel,
-          name: values.name,
-          email: values.email,
-          subject: values.subject,
-          message: values.message,
-        },
+      // Enviar email usando EmailJS
+      await sendEmail({
+        department: values.department,
+        departmentLabel,
+        name: values.name,
+        email: values.email,
+        subject: values.subject,
+        message: values.message,
       });
 
-      if (error) throw error;
+
 
 
 

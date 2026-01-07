@@ -3,8 +3,8 @@ import { BackButton } from "./BackButton";
 
 export const Header = () => {
   return (
-    <header className="bg-gradient-to-r from-primary to-accent text-primary-foreground rounded-2xl shadow-lg p-10 mb-8 animate-fade-in-up relative">
-      <div className="absolute left-10 top-10">
+    <header className="bg-gradient-to-r from-primary to-accent text-primary-foreground rounded-2xl shadow-lg p-6 md:p-10 mb-8 animate-fade-in-up relative flex flex-col md:block">
+      <div className="self-start mb-4 md:mb-0 md:absolute md:left-10 md:top-10">
         <BackButton />
       </div>
       <div className="text-center">
