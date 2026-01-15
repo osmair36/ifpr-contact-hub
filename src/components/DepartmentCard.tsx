@@ -1,4 +1,4 @@
-import { ExternalLink, Mail, Clock, Users, LucideIcon } from "lucide-react";
+import { ExternalLink, Mail, Clock, Users, LucideIcon, Phone } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { HoursDialog } from "./HoursDialog";
@@ -11,19 +11,20 @@ interface DepartmentCardProps {
   team: string[];
   link: string;
   icon: LucideIcon;
+  voip?: string;
 }
 
-export const DepartmentCard = ({ title, email, hours, team, link, icon: Icon }: DepartmentCardProps) => {
+export const DepartmentCard = ({ title, email, hours, team, link, icon: Icon, voip }: DepartmentCardProps) => {
   const handleEmailClick = (e: React.MouseEvent) => {
     e.preventDefault();
     const contactForm = document.getElementById('contact-form');
-    
+
     if (contactForm) {
       contactForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      
+
       setTimeout(() => {
-        const event = new CustomEvent('preselectDepartment', { 
-          detail: { email } 
+        const event = new CustomEvent('preselectDepartment', {
+          detail: { email }
         });
         window.dispatchEvent(event);
       }, 600);
@@ -50,9 +51,15 @@ export const DepartmentCard = ({ title, email, hours, team, link, icon: Icon }: 
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-3">
+        {voip && (
+          <div className="flex items-center gap-2 text-muted-foreground pb-2 border-b border-border/50">
+            <Phone className="w-4 h-4 shrink-0 text-primary" />
+            <span className="font-medium text-foreground">Ramal VOIP: {voip}</span>
+          </div>
+        )}
         <div className="flex items-center gap-2 text-muted-foreground">
           <Mail className="w-4 h-4 shrink-0" />
-          <button 
+          <button
             onClick={handleEmailClick}
             className="hover:text-primary transition-colors break-all text-left cursor-pointer"
           >
@@ -74,7 +81,7 @@ export const DepartmentCard = ({ title, email, hours, team, link, icon: Icon }: 
           </TeamDialog>
           <div className="space-y-1.5 ml-6">
             {team.map((member, index) => (
-              <p 
+              <p
                 key={index}
                 className="text-sm text-muted-foreground hover:text-accent hover:scale-105 transition-all cursor-default"
               >

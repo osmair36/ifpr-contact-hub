@@ -22,6 +22,7 @@ const Index = () => {
               team={dept.team}
               link={dept.link}
               icon={dept.icon}
+              voip={dept.voip}
             />
           ))}
         </div>

@@ -43,6 +43,7 @@ export const sendEmail = async (templateParams: EmailParams) => {
     };
 
     try {
+        console.log("Iniciando envio via SMTP2GO...");
         const response = await fetch("https://api.smtp2go.com/v3/email/send", {
             method: "POST",
             headers: {
@@ -51,16 +52,26 @@ export const sendEmail = async (templateParams: EmailParams) => {
             body: JSON.stringify(payload),
         });
 
-        const data = await response.json();
-
-        if (!response.ok || (data.data && data.data.error)) {
-            console.error("Erro API SMTP2GO:", data);
-            throw new Error(data.data?.error || "Falha ao enviar email via SMTP2GO.");
+        // Tenta fazer o parse do JSON, mas previne falha se não for JSON
+        let data;
+        const responseText = await response.text();
+        try {
+            data = JSON.parse(responseText);
+        } catch (e) {
+            console.error("Erro ao fazer parse da resposta do SMTP2GO:", responseText);
+            throw new Error(`Resposta inválida do servidor: ${responseText.substring(0, 50)}...`);
         }
 
+        if (!response.ok || (data.data && data.data.error)) {
+            console.error("Erro API SMTP2GO (Response):", data);
+            const errorMsg = data.data?.error || data.data?.error_code || "Falha desconhecida no envio.";
+            throw new Error(`SMTP2GO Error: ${errorMsg}`);
+        }
+
+        console.log("Email enviado com sucesso!", data);
         return data;
     } catch (error) {
-        console.error("Erro ao enviar email:", error);
+        console.error("Erro detalhado no serviço de email:", error);
         throw error;
     }
 };
