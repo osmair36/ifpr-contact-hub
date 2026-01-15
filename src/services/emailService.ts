@@ -33,10 +33,22 @@ export const sendEmail = async (templateParams: EmailParams) => {
             <h3>Mensagem:</h3>
             <p>${templateParams.message.replace(/\n/g, '<br>')}</p>
             <hr />
+            <p>
+                <strong>Para responder, clique no link abaixo ou use o botão de responder do seu email:</strong><br />
+                <a href="mailto:${templateParams.email}?subject=Re: ${templateParams.subject}" style="display: inline-block; padding: 10px 20px; background-color: #004d40; color: white; text-decoration: none; border-radius: 5px; margin-top: 10px;">
+                    Responder para ${templateParams.name} (${templateParams.email})
+                </a>
+            </p>
+            <hr />
             <p><small>Este email foi enviado pelo formulário Fale Conosco.</small></p>
         `,
-        custom_headers: [],
-        reply_to: templateParams.email
+        custom_headers: [
+            {
+                "header": "Reply-To",
+                "value": `${templateParams.name} <${templateParams.email}>`
+            }
+        ],
+        reply_to: `${templateParams.name} <${templateParams.email}>`
     };
 
     console.log("Payload enviado para SMTP2GO:", JSON.stringify(payload, null, 2));
