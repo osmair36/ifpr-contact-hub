@@ -7,6 +7,7 @@ export interface Department {
   team: string[];
   link: string;
   icon: LucideIcon;
+  voip?: string;
 }
 
 export const departments: Department[] = [
@@ -21,6 +22,7 @@ export const departments: Department[] = [
     ],
     link: "https://ifpr.edu.br/assis-chateaubriand/menu-academico/secretaria-academica/informacoes/",
     icon: FileText,
+    voip: "206",
   },
   {
     title: "BIBLIOTECA",
@@ -33,6 +35,7 @@ export const departments: Department[] = [
     ],
     link: "https://ifpr.edu.br/assis-chateaubriand/menu-academico/biblioteca/regulamento-2/",
     icon: Library,
+    voip: "208",
   },
   {
     title: "SEPAE – SEÇÃO PEDAGÓGICA E DE ASSUNTOS ESTUDANTIS",
@@ -52,6 +55,7 @@ export const departments: Department[] = [
     ],
     link: "https://ifpr.edu.br/assis-chateaubriand/menu-academico/area-do-estudante/apoio-ao-estudante/secao-pedagogica/",
     icon: BookOpen,
+    voip: "209",
   },
   {
     title: "NAPNE – NÚCLEO DE ATENDIMENTO AS PESSOAS COM NECESSIDADES EDUCACIONAIS ESPECÍFICAS",
@@ -79,6 +83,7 @@ export const departments: Department[] = [
     ],
     link: "https://ifpr.edu.br/assis-chateaubriand/menu-institucional/direcao-administrativa/",
     icon: Building2,
+    voip: "200",
   },
   {
     title: "SEÇÃO DE GESTÃO DE PESSOAS",
@@ -87,6 +92,7 @@ export const departments: Department[] = [
     team: ["Rodrigo Amaral Calisto"],
     link: "https://ifpr.edu.br/assis-chateaubriand/menu-institucional/gt-pessoas/",
     icon: Users,
+    voip: "207",
   },
   {
     title: "COORDENAÇÃO DE ENSINO",
@@ -95,6 +101,7 @@ export const departments: Department[] = [
     team: ["Vagner Simões Santos"],
     link: "https://ifpr.edu.br/assis-chateaubriand/menu-institucional/direcao-de-ensino/coordenacao-de-ensino/",
     icon: GraduationCap,
+    voip: "203",
   },
   {
     title: "DIEPEX – DIRETORIA DE ENSINO, PESQUISA E EXTENSÃO",
@@ -103,6 +110,7 @@ export const departments: Department[] = [
     team: ["Everaldo Lorensetti"],
     link: "https://ifpr.edu.br/assis-chateaubriand/menu-institucional/direcao-de-ensino/",
     icon: Lightbulb,
+    voip: "202",
   },
   {
     title: "SEÇÃO DE TECNOLOGIA DA INFORMAÇÃO - TI",
@@ -111,5 +119,6 @@ export const departments: Department[] = [
     team: ["Osmair Barbosa da Silva - Técnico de Tecnologia da Informação"],
     link: "https://ifpr.edu.br/assis-chateaubriand/menu-institucional/direcao-administrativa/departamento-de-ti/",
     icon: Monitor,
+    voip: "210",
   },
 ];

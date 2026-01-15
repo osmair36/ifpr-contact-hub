@@ -18,7 +18,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
-import { Send, Loader2 } from "lucide-react";
+import { Send, Loader2, Phone } from "lucide-react";
 
 import { sendEmail } from "@/services/emailService";
 import { departments } from "@/data/departments";
@@ -62,6 +62,9 @@ const ContactFormContent = () => {
       message: "",
     },
   });
+
+  const selectedDepartmentEmail = form.watch("department");
+  const selectedDepartment = departments.find(d => d.email === selectedDepartmentEmail);
 
   useEffect(() => {
     const handlePreselectDepartment = (event: CustomEvent<{ email: string }>) => {
@@ -170,6 +173,22 @@ const ContactFormContent = () => {
                 </FormItem>
               )}
             />
+
+            {selectedDepartment?.voip && (
+              <div className="flex items-center gap-3 rounded-lg bg-primary/5 p-4 text-muted-foreground border border-primary/10 shadow-sm animate-fade-in">
+                <div className="bg-primary/10 p-2 rounded-full">
+                  <Phone className="h-5 w-5 text-primary" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-xs font-semibold text-primary uppercase tracking-wide">
+                    Número do Ramal VOIP
+                  </span>
+                  <span className="text-lg font-bold text-foreground">
+                    {selectedDepartment.voip}
+                  </span>
+                </div>
+              </div>
+            )}
 
             <FormField
               control={form.control}
