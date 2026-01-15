@@ -10,7 +10,8 @@ export interface EmailParams {
 
 export const sendEmail = async (templateParams: EmailParams) => {
     const API_KEY = "api-9D07C68DB6F94997B96DFD50FC81DFC8";
-    const SENDER_EMAIL = "rtic.assischateaubriand@ifpr.edu.br";
+    // Format: "Name <email>"
+    const SENDER_EMAIL = "Fale Conosco <rtic.assischateaubriand@ifpr.edu.br>";
 
     // Validar se o departamento (recipient) é um email válido
     if (!templateParams.department || !templateParams.department.includes('@')) {
@@ -23,7 +24,7 @@ export const sendEmail = async (templateParams: EmailParams) => {
         sender: SENDER_EMAIL,
         subject: `[Fale Conosco] ${templateParams.subject}`,
         html_body: `
-            <h2>Nova mensagem do Fale Conosco</h2>
+            <h2>Nova mensagem do Fale Conosco - IFPR Campus Assis Chateaubriand</h2>
             <p><strong>Departamento:</strong> ${templateParams.departmentLabel}</p>
             <p><strong>Nome:</strong> ${templateParams.name}</p>
             <p><strong>Email do Remetente:</strong> ${templateParams.email}</p>
@@ -32,7 +33,7 @@ export const sendEmail = async (templateParams: EmailParams) => {
             <h3>Mensagem:</h3>
             <p>${templateParams.message.replace(/\n/g, '<br>')}</p>
             <hr />
-            <p><small>Este email foi enviado automaticamente pelo sistema IFPR Contact Hub.</small></p>
+            <p><small>Este email foi enviado pelo formulário Fale Conosco.</small></p>
         `,
         custom_headers: [
             {

@@ -113,7 +113,7 @@ const ContactFormContent = () => {
 
 
       toast.success("Mensagem enviada!", {
-        description: "Se tudo estiver correto, o departamento receberá em breve.",
+        description: "Sua mensagem foi enviada com Sucesso!",
       });
 
       form.reset();

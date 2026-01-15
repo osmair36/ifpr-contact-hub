@@ -10,10 +10,11 @@ export const ErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => {
             <p className="text-sm text-muted-foreground max-w-md">
                 Ocorreu um erro ao tentar processar esta ação.
             </p>
-            <pre className="text-xs bg-black/10 p-4 rounded text-left overflow-auto max-w-full w-full whitespace-pre-wrap break-words text-red-600">
-                {error.message}
-                {error.stack && <div className="mt-2 pt-2 border-t border-red-200/20">{error.stack.slice(0, 300)}...</div>}
-            </pre>
+            {process.env.NODE_ENV === 'development' && (
+                <pre className="text-xs bg-black/10 p-4 rounded text-left overflow-auto max-w-full">
+                    {error.message}
+                </pre>
+            )}
             <Button onClick={resetErrorBoundary} variant="outline" className="mt-4">
                 Tentar novamente
             </Button>
