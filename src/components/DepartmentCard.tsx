@@ -54,7 +54,7 @@ export const DepartmentCard = ({ title, email, hours, team, link, icon: Icon, vo
         {voip && (
           <div className="flex items-center gap-2 text-muted-foreground pb-2 border-b border-border/50">
             <Phone className="w-4 h-4 shrink-0 text-primary" />
-            <span className="font-medium text-foreground">Ramal VOIP: {voip}</span>
+            <span className="font-medium text-foreground">Ramal Telefônico (VOIP): {voip}</span>
           </div>
         )}
         <div className="flex items-center gap-2 text-muted-foreground">
