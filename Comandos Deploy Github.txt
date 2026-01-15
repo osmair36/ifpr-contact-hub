@@ -1,0 +1,12 @@
+# Adiciona todos os arquivos modificados
+git add .
+
+# Salva a versão com uma mensagem explicando a mudança
+git commit -m "Implementação dos números VOIP e atualização do Email"
+
+# Envia o código fonte para o repositório principal no GitHub
+git push origin main
+
+# Gera a versão de produção e envia para a branch 'gh-pages'
+npm run deploy
+
