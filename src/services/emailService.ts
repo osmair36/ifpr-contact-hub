@@ -38,7 +38,7 @@ export const sendEmail = async (templateParams: EmailParams) => {
         custom_headers: [
             {
                 "header": "Reply-To",
-                "value": templateParams.email
+                "value": `${templateParams.name} <${templateParams.email}>`
             }
         ]
     };
