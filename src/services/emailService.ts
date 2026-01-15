@@ -35,11 +35,11 @@ export const sendEmail = async (templateParams: EmailParams) => {
             <hr />
             <p><small>Este email foi enviado pelo formulário Fale Conosco.</small></p>
         `,
-        custom_headers: [
-            // Removed custom_headers in favor of top-level parameter
-        ],
-        reply_to: `${templateParams.name} <${templateParams.email}>`
+        custom_headers: [],
+        reply_to: templateParams.email
     };
+
+    console.log("Payload enviado para SMTP2GO:", JSON.stringify(payload, null, 2));
 
     try {
         console.log("Iniciando envio via SMTP2GO...");
