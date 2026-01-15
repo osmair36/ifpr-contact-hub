@@ -36,11 +36,9 @@ export const sendEmail = async (templateParams: EmailParams) => {
             <p><small>Este email foi enviado pelo formulário Fale Conosco.</small></p>
         `,
         custom_headers: [
-            {
-                "header": "Reply-To",
-                "value": `${templateParams.name} <${templateParams.email}>`
-            }
-        ]
+            // Removed custom_headers in favor of top-level parameter
+        ],
+        reply_to: `${templateParams.name} <${templateParams.email}>`
     };
 
     try {
