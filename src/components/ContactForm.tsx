@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { ErrorBoundary } from "react-error-boundary";
+import { ErrorFallback } from "./ErrorFallback";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
@@ -40,6 +42,14 @@ const formSchema = z.object({
 
 
 export const ContactForm = () => {
+  return (
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <ContactFormContent />
+    </ErrorBoundary>
+  );
+};
+
+const ContactFormContent = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({

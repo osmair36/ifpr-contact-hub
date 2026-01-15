@@ -1,5 +1,3 @@
-import emailjs from '@emailjs/browser';
-
 export interface EmailParams {
     department: string;
     departmentLabel: string;
@@ -11,23 +9,58 @@ export interface EmailParams {
 }
 
 export const sendEmail = async (templateParams: EmailParams) => {
-    // Credentials should be in .env
-    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+    const API_KEY = "api-9D07C68DB6F94997B96DFD50FC81DFC8";
+    const SENDER_EMAIL = "rtic.assischateaubriand@ifpr.edu.br";
 
-    if (!serviceId || !templateId || !publicKey) {
-        console.error("Credenciais do EmailJS ausentes. Verifique o arquivo .env.");
-        console.log("Esperado: VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, VITE_EMAILJS_PUBLIC_KEY");
-        // Throwing a friendly error for the UI
-        throw new Error("Erro de configuração: Credenciais de email não encontradas.");
+    // Validar se o departamento (recipient) é um email válido
+    if (!templateParams.department || !templateParams.department.includes('@')) {
+        throw new Error("Email do departamento inválido.");
     }
 
+    const payload = {
+        api_key: API_KEY,
+        to: [templateParams.department],
+        sender: SENDER_EMAIL,
+        subject: `[Fale Conosco] ${templateParams.subject}`,
+        html_body: `
+            <h2>Nova mensagem do Fale Conosco</h2>
+            <p><strong>Departamento:</strong> ${templateParams.departmentLabel}</p>
+            <p><strong>Nome:</strong> ${templateParams.name}</p>
+            <p><strong>Email do Remetente:</strong> ${templateParams.email}</p>
+            <p><strong>Assunto:</strong> ${templateParams.subject}</p>
+            <hr />
+            <h3>Mensagem:</h3>
+            <p>${templateParams.message.replace(/\n/g, '<br>')}</p>
+            <hr />
+            <p><small>Este email foi enviado automaticamente pelo sistema IFPR Contact Hub.</small></p>
+        `,
+        custom_headers: [
+            {
+                "header": "Reply-To",
+                "value": templateParams.email
+            }
+        ]
+    };
+
     try {
-        const response = await emailjs.send(serviceId, templateId, templateParams, publicKey);
-        return response;
+        const response = await fetch("https://api.smtp2go.com/v3/email/send", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || (data.data && data.data.error)) {
+            console.error("Erro API SMTP2GO:", data);
+            throw new Error(data.data?.error || "Falha ao enviar email via SMTP2GO.");
+        }
+
+        return data;
     } catch (error) {
-        console.error("Erro ao enviar email via EmailJS:", error);
-        throw new Error("Falha ao enviar o email. Tente novamente mais tarde.");
+        console.error("Erro ao enviar email:", error);
+        throw error;
     }
 };
